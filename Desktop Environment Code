@@ -1,0 +1,24 @@
+# Install the required library: sudo apt-get install python3-xlib
+from Xlib import X, display, Xutil
+
+# Create a blank window
+disp = display.Display()
+screen = disp.screen()
+root = screen.root
+win = root.create_window(0, 0, 800, 600, 0, X.CopyFromParent, X.InputOutput, X.CopyFromParent)
+
+# Set window attributes
+win.change_attributes(event_mask=X.ExposureMask | X.KeyPressMask)
+win.map()
+
+# Event loop
+while True:
+    event = disp.next_event()
+
+    if event.type == X.Expose:
+        pass  # You can handle drawing or other operations here
+
+    if event.type == X.KeyPress:
+        break  # Exit on key press
+
+disp.close()
